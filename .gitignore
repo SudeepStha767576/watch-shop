@@ -1,0 +1,19 @@
+# Dependencies
+frontend/node_modules/
+
+# Build output (can be rebuilt with npm run build)
+dist/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Env files
+.env
+
+# Claude plans
+.claude/

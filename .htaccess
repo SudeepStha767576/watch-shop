@@ -1,0 +1,15 @@
+RewriteEngine On
+
+# API requests go to PHP
+RewriteRule ^api/ - [L]
+
+# Serve existing files directly (images, old PHP pages, etc.)
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteRule ^ - [L]
+
+# Serve dist/ assets if they exist (strip the base path for the check)
+RewriteCond %{DOCUMENT_ROOT}/watch-shop/dist/$1 -f
+RewriteRule ^(.*)$ dist/$1 [L]
+
+# Everything else goes to the React SPA
+RewriteRule ^ dist/index.html [L]
