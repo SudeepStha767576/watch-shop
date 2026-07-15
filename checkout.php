@@ -24,7 +24,7 @@ mysqli_stmt_close($stmt);
 
 if (empty($items)) {
     set_flash('error', 'Your cart is empty.');
-    redirect('/cricket-shop/cart.php');
+    redirect('/watch-shop/cart.php');
 }
 
 $user_stmt = mysqli_prepare($conn, "SELECT full_name, email, phone, address FROM users WHERE id = ?");
@@ -76,9 +76,9 @@ mysqli_stmt_close($user_stmt);
             <div class="alert alert-danger mt-2">
                 Some items in your cart have issues. Please update your cart before proceeding.
             </div>
-            <a href="/cricket-shop/cart.php" class="btn btn-secondary btn-block mt-1">Go to Cart</a>
+            <a href="/watch-shop/cart.php" class="btn btn-secondary btn-block mt-1">Go to Cart</a>
         <?php else: ?>
-            <form action="/cricket-shop/api/checkout-handler.php" method="POST" class="mt-2">
+            <form action="/watch-shop/api/checkout-handler.php" method="POST" class="mt-2">
                 <?php echo csrf_input(); ?>
                 <button type="submit" class="btn btn-primary btn-block" style="padding:14px;font-size:1.1rem;">
                     Pay <?php echo format_price($grand_total); ?> with Khalti

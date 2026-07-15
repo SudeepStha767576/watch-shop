@@ -13,7 +13,7 @@ mysqli_stmt_close($cat_stmt);
 
 if (!$category) {
     set_flash('error', 'Category not found.');
-    redirect('/cricket-shop/');
+    redirect('/watch-shop/');
 }
 
 $page_title = $category['name'];
@@ -28,21 +28,21 @@ $product_count = mysqli_num_rows($products);
 
 <div class="page-header">
     <h1><?php echo h($category['name']); ?></h1>
-    <p><a href="/cricket-shop/">Home</a> &raquo; <?php echo h($category['name']); ?> <span style="color:var(--text-light);">(<?php echo $product_count; ?> products)</span></p>
+    <p><a href="/watch-shop/">Home</a> &raquo; <?php echo h($category['name']); ?> <span style="color:var(--text-light);">(<?php echo $product_count; ?> products)</span></p>
 </div>
 
 <?php if ($product_count > 0): ?>
 <div class="grid grid-4">
     <?php while ($product = mysqli_fetch_assoc($products)): ?>
-    <a href="/cricket-shop/product-detail.php?id=<?php echo $product['id']; ?>" class="card">
+    <a href="/watch-shop/product-detail.php?id=<?php echo $product['id']; ?>" class="card">
         <div class="card-img-wrap">
             <?php if ($product['quantity'] <= 0): ?>
                 <span class="badge badge-inactive badge-stock">Out of Stock</span>
             <?php endif; ?>
             <?php if ($product['image']): ?>
-                <img src="/cricket-shop/assets/images/products/<?php echo h($product['image']); ?>" alt="<?php echo h($product['name']); ?>" class="card-img">
+                <img src="/watch-shop/assets/images/products/<?php echo h($product['image']); ?>" alt="<?php echo h($product['name']); ?>" class="card-img">
             <?php else: ?>
-                <div class="card-img" style="display:flex;align-items:center;justify-content:center;font-size:3.5rem;color:var(--gray-mid);">🏏</div>
+                <div class="card-img" style="display:flex;align-items:center;justify-content:center;font-size:3.5rem;color:var(--gray-mid);">⌚</div>
             <?php endif; ?>
         </div>
         <div class="card-body">
@@ -61,7 +61,7 @@ $product_count = mysqli_num_rows($products);
 <div class="empty-state">
     <div class="empty-icon">📦</div>
     <p>No products in this category yet.</p>
-    <a href="/cricket-shop/" class="btn btn-secondary">Back to Home</a>
+    <a href="/watch-shop/" class="btn btn-secondary">Back to Home</a>
 </div>
 <?php endif; ?>
 

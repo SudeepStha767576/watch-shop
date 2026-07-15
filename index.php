@@ -10,8 +10,8 @@ $featured = mysqli_stmt_get_result($featured_stmt);
 ?>
 
 <section class="hero">
-    <h1>Premium Cricket Gear<br>for Every Player</h1>
-    <p>Discover top-quality bats, balls, protective gear and accessories from trusted brands in Nepal</p>
+    <h1>Premium Timepieces<br>for Every Occasion</h1>
+    <p>Discover top-quality luxury, sports, smart watches and accessories from trusted brands in Nepal</p>
     <a href="#categories" class="btn btn-primary">Shop Now</a>
 </section>
 
@@ -21,10 +21,10 @@ $featured = mysqli_stmt_get_result($featured_stmt);
     </div>
     <div class="grid" style="grid-template-columns: repeat(6, 1fr);">
         <?php
-        $icons = ['bats'=>'🏏','balls'=>'⚾','pads'=>'🦵','gloves'=>'🧤','jerseys'=>'👕','accessories'=>'🎒'];
+        $icons = ['luxury'=>'💎','sports'=>'⌚','smart-watches'=>'📱','casual'=>'🕐','classic'=>'🕰️','accessories'=>'🎒'];
         while ($cat = mysqli_fetch_assoc($categories)):
         ?>
-        <a href="/cricket-shop/products.php?category=<?php echo h($cat['slug']); ?>" class="category-card">
+        <a href="/watch-shop/products.php?category=<?php echo h($cat['slug']); ?>" class="category-card">
             <span class="category-icon"><?php echo $icons[$cat['slug']] ?? '📦'; ?></span>
             <span class="category-name"><?php echo h($cat['name']); ?></span>
         </a>
@@ -40,12 +40,12 @@ $featured = mysqli_stmt_get_result($featured_stmt);
     <?php if (mysqli_num_rows($featured) > 0): ?>
     <div class="grid grid-4">
         <?php while ($product = mysqli_fetch_assoc($featured)): ?>
-        <a href="/cricket-shop/product-detail.php?id=<?php echo $product['id']; ?>" class="card">
+        <a href="/watch-shop/product-detail.php?id=<?php echo $product['id']; ?>" class="card">
             <div class="card-img-wrap">
                 <?php if ($product['image']): ?>
-                    <img src="/cricket-shop/assets/images/products/<?php echo h($product['image']); ?>" alt="<?php echo h($product['name']); ?>" class="card-img">
+                    <img src="/watch-shop/assets/images/products/<?php echo h($product['image']); ?>" alt="<?php echo h($product['name']); ?>" class="card-img">
                 <?php else: ?>
-                    <div class="card-img" style="display:flex;align-items:center;justify-content:center;font-size:3.5rem;color:var(--gray-mid);">🏏</div>
+                    <div class="card-img" style="display:flex;align-items:center;justify-content:center;font-size:3.5rem;color:var(--gray-mid);">⌚</div>
                 <?php endif; ?>
             </div>
             <div class="card-body">
@@ -59,7 +59,7 @@ $featured = mysqli_stmt_get_result($featured_stmt);
     </div>
     <?php else: ?>
     <div class="empty-state">
-        <div class="empty-icon">🏏</div>
+        <div class="empty-icon">⌚</div>
         <p>No products available yet. Check back soon!</p>
     </div>
     <?php endif; ?>

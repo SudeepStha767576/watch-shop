@@ -31,13 +31,13 @@ export default function App() {
         <CartProvider>
           <div className="min-h-screen flex flex-col">
             <Navbar />
-            <main className="flex-1 max-w-7xl w-full mx-auto px-4 py-8">
+            <main className="flex-1">
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/forgot-password" element={<ForgotPassword />} />
-                <Route path="/products/:categorySlug" element={<Products />} />
+                <Route path="/products" element={<Products />} />
                 <Route path="/product/:id" element={<ProductDetail />} />
 
                 <Route element={<ProtectedRoute />}>

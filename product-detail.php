@@ -13,7 +13,7 @@ mysqli_stmt_close($stmt);
 
 if (!$product) {
     set_flash('error', 'Product not found.');
-    redirect('/cricket-shop/');
+    redirect('/watch-shop/');
 }
 
 $page_title = $product['name'];
@@ -22,8 +22,8 @@ require_once 'includes/header.php';
 
 <div class="page-header">
     <p>
-        <a href="/cricket-shop/">Home</a> &raquo;
-        <a href="/cricket-shop/products.php?category=<?php echo h($product['category_slug']); ?>"><?php echo h($product['category_name']); ?></a> &raquo;
+        <a href="/watch-shop/">Home</a> &raquo;
+        <a href="/watch-shop/products.php?category=<?php echo h($product['category_slug']); ?>"><?php echo h($product['category_name']); ?></a> &raquo;
         <?php echo h($product['name']); ?>
     </p>
 </div>
@@ -31,9 +31,9 @@ require_once 'includes/header.php';
 <div class="product-detail">
     <div>
         <?php if ($product['image']): ?>
-            <img src="/cricket-shop/assets/images/products/<?php echo h($product['image']); ?>" alt="<?php echo h($product['name']); ?>" class="product-detail-img">
+            <img src="/watch-shop/assets/images/products/<?php echo h($product['image']); ?>" alt="<?php echo h($product['name']); ?>" class="product-detail-img">
         <?php else: ?>
-            <div class="product-detail-img" style="display:flex;align-items:center;justify-content:center;font-size:5rem;color:var(--gray-dark);">🏏</div>
+            <div class="product-detail-img" style="display:flex;align-items:center;justify-content:center;font-size:5rem;color:var(--gray-dark);">⌚</div>
         <?php endif; ?>
     </div>
     <div>
@@ -55,7 +55,7 @@ require_once 'includes/header.php';
         <?php endif; ?>
 
         <?php if (is_logged_in() && !is_admin() && $product['quantity'] > 0): ?>
-        <form action="/cricket-shop/api/cart-handler.php" method="POST" class="mt-2">
+        <form action="/watch-shop/api/cart-handler.php" method="POST" class="mt-2">
             <?php echo csrf_input(); ?>
             <input type="hidden" name="action" value="add">
             <input type="hidden" name="product_id" value="<?php echo $product['id']; ?>">
@@ -67,7 +67,7 @@ require_once 'includes/header.php';
         </form>
         <?php elseif (!is_logged_in()): ?>
         <div class="mt-2">
-            <a href="/cricket-shop/login.php" class="btn btn-primary">Login to Buy</a>
+            <a href="/watch-shop/login.php" class="btn btn-primary">Login to Buy</a>
         </div>
         <?php endif; ?>
     </div>

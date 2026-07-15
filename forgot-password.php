@@ -3,7 +3,7 @@ $page_title = 'Reset Password';
 require_once 'includes/header.php';
 
 if (is_logged_in()) {
-    redirect('/cricket-shop/');
+    redirect('/watch-shop/');
 }
 ?>
 
@@ -12,7 +12,7 @@ if (is_logged_in()) {
     <p class="text-center mb-2" style="color: var(--text-light); font-size: 0.9rem;">
         Enter your username and date of birth to reset your password.
     </p>
-    <form action="/cricket-shop/api/reset-password-handler.php" method="POST">
+    <form action="/watch-shop/api/reset-password-handler.php" method="POST">
         <?php echo csrf_input(); ?>
 
         <div class="form-group">
@@ -38,7 +38,7 @@ if (is_logged_in()) {
         <button type="submit" class="btn btn-primary btn-block">Reset Password</button>
     </form>
     <div class="form-footer">
-        <a href="/cricket-shop/login.php">Back to Login</a>
+        <a href="/watch-shop/login.php">Back to Login</a>
     </div>
 </div>
 

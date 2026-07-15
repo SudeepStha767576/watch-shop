@@ -9,11 +9,11 @@ $categories = mysqli_query($conn, "SELECT * FROM categories ORDER BY name");
 
 <div class="page-header">
     <h1>Add New Product</h1>
-    <p><a href="/cricket-shop/admin/products.php">Back to Products</a></p>
+    <p><a href="/watch-shop/admin/products.php">Back to Products</a></p>
 </div>
 
 <div class="product-form">
-    <form action="/cricket-shop/api/admin/product-handler.php" method="POST" enctype="multipart/form-data">
+    <form action="/watch-shop/api/admin/product-handler.php" method="POST" enctype="multipart/form-data">
         <?php echo csrf_input(); ?>
 
         <div class="form-group">

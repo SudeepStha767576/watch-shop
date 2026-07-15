@@ -106,9 +106,10 @@ class CartController {
 
     public static function remove($conn, $product_id) {
         $user = require_auth($conn);
+        $product_id = (int)$product_id;
 
         $stmt = mysqli_prepare($conn, "DELETE FROM cart WHERE user_id = ? AND product_id = ?");
-        mysqli_stmt_bind_param($stmt, "ii", $user['id'], (int)$product_id);
+        mysqli_stmt_bind_param($stmt, "ii", $user['id'], $product_id);
         mysqli_stmt_execute($stmt);
         mysqli_stmt_close($stmt);
 

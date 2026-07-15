@@ -1,12 +1,12 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Button } from '@/components/ui/button'
 import { useAuth } from '@/context/AuthContext'
 import { ApiError } from '@/lib/api'
 import { toast } from 'sonner'
+import { Watch } from 'lucide-react'
 
 export default function Login() {
   const [username, setUsername] = useState('')
@@ -30,31 +30,31 @@ export default function Login() {
   }
 
   return (
-    <div className="max-w-md mx-auto mt-8">
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-center text-2xl">Login</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div>
-              <Label htmlFor="username">Username</Label>
-              <Input id="username" value={username} onChange={(e) => setUsername(e.target.value)} required />
-            </div>
-            <div>
-              <Label htmlFor="password">Password</Label>
-              <Input id="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
-            </div>
-            <Button type="submit" className="w-full" disabled={loading}>
-              {loading ? 'Logging in...' : 'Login'}
-            </Button>
-          </form>
-          <div className="text-center mt-4 text-sm text-muted-foreground space-y-1">
-            <Link to="/forgot-password" className="text-accent hover:underline block">Forgot Password?</Link>
-            <p>Don't have an account? <Link to="/signup" className="text-accent hover:underline">Sign up here</Link></p>
+    <div className="min-h-[70vh] flex items-center justify-center px-4">
+      <div className="w-full max-w-sm">
+        <div className="text-center mb-8">
+          <Watch className="h-10 w-10 text-amber-500 mx-auto mb-3" />
+          <h1 className="text-2xl font-bold">Welcome back</h1>
+          <p className="text-sm text-muted-foreground mt-1">Sign in to your TimePiece account</p>
+        </div>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div>
+            <Label htmlFor="username">Username</Label>
+            <Input id="username" value={username} onChange={(e) => setUsername(e.target.value)} required />
           </div>
-        </CardContent>
-      </Card>
+          <div>
+            <Label htmlFor="password">Password</Label>
+            <Input id="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+          </div>
+          <Button type="submit" className="w-full bg-amber-500 hover:bg-amber-600 text-black font-semibold" disabled={loading}>
+            {loading ? 'Signing in...' : 'Sign In'}
+          </Button>
+        </form>
+        <div className="text-center mt-6 text-sm text-muted-foreground space-y-2">
+          <Link to="/forgot-password" className="text-amber-600 hover:underline block">Forgot Password?</Link>
+          <p>Don't have an account? <Link to="/signup" className="text-amber-600 hover:underline">Sign up</Link></p>
+        </div>
+      </div>
     </div>
   )
 }

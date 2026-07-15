@@ -9,7 +9,7 @@ $products = mysqli_query($conn, "SELECT p.*, c.name as category_name FROM produc
 
 <div class="admin-toolbar">
     <h2>Manage Products</h2>
-    <a href="/cricket-shop/admin/add-product.php" class="btn btn-primary">+ Add Product</a>
+    <a href="/watch-shop/admin/add-product.php" class="btn btn-primary">+ Add Product</a>
 </div>
 
 <?php if (mysqli_num_rows($products) > 0): ?>
@@ -31,9 +31,9 @@ $products = mysqli_query($conn, "SELECT p.*, c.name as category_name FROM produc
             <tr>
                 <td>
                     <?php if ($p['image']): ?>
-                        <img src="/cricket-shop/assets/images/products/<?php echo h($p['image']); ?>" alt="">
+                        <img src="/watch-shop/assets/images/products/<?php echo h($p['image']); ?>" alt="">
                     <?php else: ?>
-                        <div style="width:50px;height:50px;background:var(--gray);border-radius:4px;display:flex;align-items:center;justify-content:center;">🏏</div>
+                        <div style="width:50px;height:50px;background:var(--gray);border-radius:4px;display:flex;align-items:center;justify-content:center;">⌚</div>
                     <?php endif; ?>
                 </td>
                 <td><?php echo h($p['name']); ?></td>
@@ -49,8 +49,8 @@ $products = mysqli_query($conn, "SELECT p.*, c.name as category_name FROM produc
                 </td>
                 <td>
                     <div class="actions">
-                        <a href="/cricket-shop/admin/edit-product.php?id=<?php echo $p['id']; ?>" class="btn btn-sm btn-secondary">Edit</a>
-                        <form action="/cricket-shop/api/admin/toggle-product.php" method="POST" class="toggle-form" data-active="<?php echo $p['is_active']; ?>" style="display:inline;">
+                        <a href="/watch-shop/admin/edit-product.php?id=<?php echo $p['id']; ?>" class="btn btn-sm btn-secondary">Edit</a>
+                        <form action="/watch-shop/api/admin/toggle-product.php" method="POST" class="toggle-form" data-active="<?php echo $p['is_active']; ?>" style="display:inline;">
                             <?php echo csrf_input(); ?>
                             <input type="hidden" name="product_id" value="<?php echo $p['id']; ?>">
                             <button type="submit" class="btn btn-sm <?php echo $p['is_active'] ? 'btn-danger' : 'btn-primary'; ?>">
@@ -68,7 +68,7 @@ $products = mysqli_query($conn, "SELECT p.*, c.name as category_name FROM produc
 <div class="empty-state">
     <div class="empty-icon">📦</div>
     <p>No products yet. Add your first product!</p>
-    <a href="/cricket-shop/admin/add-product.php" class="btn btn-primary">Add Product</a>
+    <a href="/watch-shop/admin/add-product.php" class="btn btn-primary">Add Product</a>
 </div>
 <?php endif; ?>
 

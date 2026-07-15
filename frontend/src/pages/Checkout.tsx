@@ -76,7 +76,7 @@ export default function Checkout() {
             </>
           ) : (
             <>
-              <Button onClick={handlePay} disabled={paying} size="lg" className="w-full text-base py-6">
+              <Button onClick={handlePay} disabled={paying} size="lg" className="w-full text-base py-6 bg-amber-500 hover:bg-amber-600 text-black font-bold">
                 {paying ? 'Redirecting to Khalti...' : `Pay ${formatPrice(total)} with Khalti`}
               </Button>
               <p className="text-center text-xs text-muted-foreground">You will be redirected to Khalti to complete payment.</p>

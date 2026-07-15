@@ -40,9 +40,9 @@ $orders = mysqli_query($conn, "SELECT o.*, u.full_name, u.phone FROM orders o JO
                 </td>
                 <td>
                     <div class="actions">
-                        <a href="/cricket-shop/receipt.php?order_id=<?php echo $order['id']; ?>" class="btn btn-sm btn-secondary">View</a>
+                        <a href="/watch-shop/receipt.php?order_id=<?php echo $order['id']; ?>" class="btn btn-sm btn-secondary">View</a>
                         <?php if ($order['status'] === 'Paid'): ?>
-                        <form action="/cricket-shop/api/admin/update-order-status.php" method="POST" class="deliver-form" style="display:inline;">
+                        <form action="/watch-shop/api/admin/update-order-status.php" method="POST" class="deliver-form" style="display:inline;">
                             <?php echo csrf_input(); ?>
                             <input type="hidden" name="order_id" value="<?php echo $order['id']; ?>">
                             <button type="submit" class="btn btn-sm btn-primary">Mark Delivered</button>

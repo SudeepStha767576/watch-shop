@@ -7,7 +7,7 @@ $pidx = $_GET['pidx'] ?? '';
 
 if (empty($pidx)) {
     set_flash('error', 'Invalid payment response.');
-    redirect('/cricket-shop/cart.php');
+    redirect('/watch-shop/cart.php');
 }
 
 $stmt = mysqli_prepare($conn, "SELECT id, user_id, total_amount, status FROM orders WHERE khalti_pidx = ?");
@@ -18,15 +18,15 @@ mysqli_stmt_close($stmt);
 
 if (!$order) {
     set_flash('error', 'Order not found.');
-    redirect('/cricket-shop/cart.php');
+    redirect('/watch-shop/cart.php');
 }
 
 if ($order['status'] !== 'Pending') {
     if ($order['status'] === 'Paid' || $order['status'] === 'Delivered') {
-        redirect('/cricket-shop/receipt.php?order_id=' . $order['id']);
+        redirect('/watch-shop/receipt.php?order_id=' . $order['id']);
     }
     set_flash('error', 'This order has already been processed.');
-    redirect('/cricket-shop/order-history.php');
+    redirect('/watch-shop/order-history.php');
 }
 
 $payload = json_encode(['pidx' => $pidx]);
@@ -59,7 +59,7 @@ if ($http_code === 200 && isset($data['status']) && $data['status'] === 'Complet
         restore_stock($conn, $order['id']);
 
         set_flash('error', 'Payment amount mismatch. Order cancelled.');
-        redirect('/cricket-shop/order-history.php');
+        redirect('/watch-shop/order-history.php');
     }
 
     $txn_id = $data['transaction_id'] ?? '';
@@ -74,7 +74,7 @@ if ($http_code === 200 && isset($data['status']) && $data['status'] === 'Complet
     mysqli_stmt_close($stmt);
 
     set_flash('success', 'Payment successful! Here is your receipt.');
-    redirect('/cricket-shop/receipt.php?order_id=' . $order['id']);
+    redirect('/watch-shop/receipt.php?order_id=' . $order['id']);
 } else {
     $stmt = mysqli_prepare($conn, "UPDATE orders SET status = 'Cancelled' WHERE id = ?");
     mysqli_stmt_bind_param($stmt, "i", $order['id']);
@@ -84,7 +84,7 @@ if ($http_code === 200 && isset($data['status']) && $data['status'] === 'Complet
     restore_stock($conn, $order['id']);
 
     set_flash('error', 'Payment was not completed. Please try again.');
-    redirect('/cricket-shop/cart.php');
+    redirect('/watch-shop/cart.php');
 }
 
 function restore_stock($conn, $order_id) {

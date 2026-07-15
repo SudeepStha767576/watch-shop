@@ -29,9 +29,10 @@ export default function Receipt() {
   if (!order) return <p className="text-center py-20 text-muted-foreground">Order not found.</p>
 
   return (
-    <div className="max-w-2xl mx-auto bg-white border rounded-xl p-8 print:border-0 print:shadow-none">
+    <div className="max-w-2xl mx-auto bg-white border rounded-xl p-8">
       <div className="text-center border-b-2 border-dashed pb-6 mb-6">
-        <h2 className="text-xl font-extrabold">⌚ TimePiece Nepal</h2>
+        <h2 className="text-xl font-extrabold tracking-tight">TimePiece Nepal</h2>
+        <p className="text-xs text-amber-600 uppercase tracking-widest mt-1">Premium Timepieces</p>
         <p className="text-sm text-muted-foreground">Order Receipt</p>
       </div>
 
@@ -81,8 +82,7 @@ export default function Receipt() {
         </p>
       )}
 
-      <div className="flex justify-center gap-3 mt-8 print:hidden">
-        <Button variant="outline" onClick={() => window.print()}>Print Receipt</Button>
+      <div className="flex justify-center mt-8">
         <Link to="/orders"><Button variant="secondary">Back to Orders</Button></Link>
       </div>
     </div>

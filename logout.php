@@ -2,5 +2,5 @@
 session_start();
 session_unset();
 session_destroy();
-header('Location: /cricket-shop/login.php');
+header('Location: /watch-shop/login.php');
 exit;

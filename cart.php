@@ -27,9 +27,9 @@ mysqli_stmt_close($stmt);
     <?php foreach ($items as $item): ?>
     <div class="cart-item">
         <?php if ($item['image']): ?>
-            <img src="/cricket-shop/assets/images/products/<?php echo h($item['image']); ?>" alt="" class="cart-item-img">
+            <img src="/watch-shop/assets/images/products/<?php echo h($item['image']); ?>" alt="" class="cart-item-img">
         <?php else: ?>
-            <div class="cart-item-img" style="display:flex;align-items:center;justify-content:center;font-size:1.5rem;background:var(--gray);">🏏</div>
+            <div class="cart-item-img" style="display:flex;align-items:center;justify-content:center;font-size:1.5rem;background:var(--gray);">⌚</div>
         <?php endif; ?>
 
         <div>
@@ -40,7 +40,7 @@ mysqli_stmt_close($stmt);
             <?php endif; ?>
         </div>
 
-        <form action="/cricket-shop/api/cart-handler.php" method="POST" style="display:flex;align-items:center;gap:8px;">
+        <form action="/watch-shop/api/cart-handler.php" method="POST" style="display:flex;align-items:center;gap:8px;">
             <?php echo csrf_input(); ?>
             <input type="hidden" name="action" value="update">
             <input type="hidden" name="product_id" value="<?php echo $item['product_id']; ?>">
@@ -50,7 +50,7 @@ mysqli_stmt_close($stmt);
 
         <div style="text-align:right;">
             <div class="card-price"><?php echo format_price($item['line_total']); ?></div>
-            <form action="/cricket-shop/api/cart-handler.php" method="POST" style="margin-top:8px;">
+            <form action="/watch-shop/api/cart-handler.php" method="POST" style="margin-top:8px;">
                 <?php echo csrf_input(); ?>
                 <input type="hidden" name="action" value="remove">
                 <input type="hidden" name="product_id" value="<?php echo $item['product_id']; ?>">
@@ -67,8 +67,8 @@ mysqli_stmt_close($stmt);
         <span><?php echo format_price($grand_total); ?></span>
     </div>
     <div class="mt-2 text-right">
-        <a href="/cricket-shop/" class="btn btn-secondary">Continue Shopping</a>
-        <a href="/cricket-shop/checkout.php" class="btn btn-primary">Proceed to Checkout</a>
+        <a href="/watch-shop/" class="btn btn-secondary">Continue Shopping</a>
+        <a href="/watch-shop/checkout.php" class="btn btn-primary">Proceed to Checkout</a>
     </div>
 </div>
 
@@ -76,7 +76,7 @@ mysqli_stmt_close($stmt);
 <div class="empty-state">
     <div class="empty-icon">🛒</div>
     <p>Your cart is empty.</p>
-    <a href="/cricket-shop/" class="btn btn-primary">Start Shopping</a>
+    <a href="/watch-shop/" class="btn btn-primary">Start Shopping</a>
 </div>
 <?php endif; ?>
 

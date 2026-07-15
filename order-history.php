@@ -38,7 +38,7 @@ $orders = mysqli_stmt_get_result($stmt);
                 </td>
                 <td>
                     <?php if ($order['status'] === 'Paid' || $order['status'] === 'Delivered'): ?>
-                        <a href="/cricket-shop/receipt.php?order_id=<?php echo $order['id']; ?>" class="btn btn-sm btn-secondary">View Receipt</a>
+                        <a href="/watch-shop/receipt.php?order_id=<?php echo $order['id']; ?>" class="btn btn-sm btn-secondary">View Receipt</a>
                     <?php endif; ?>
                 </td>
             </tr>
@@ -50,7 +50,7 @@ $orders = mysqli_stmt_get_result($stmt);
 <div class="empty-state">
     <div class="empty-icon">📋</div>
     <p>You haven't placed any orders yet.</p>
-    <a href="/cricket-shop/" class="btn btn-primary">Start Shopping</a>
+    <a href="/watch-shop/" class="btn btn-primary">Start Shopping</a>
 </div>
 <?php endif; ?>
 

@@ -17,7 +17,7 @@ function is_admin() {
 function require_login() {
     if (!is_logged_in()) {
         $_SESSION['flash_error'] = 'Please log in to continue.';
-        header('Location: /cricket-shop/login.php');
+        header('Location: /watch-shop/login.php');
         exit;
     }
 }
@@ -25,7 +25,7 @@ function require_login() {
 function require_admin() {
     if (!is_logged_in() || !is_admin()) {
         $_SESSION['flash_error'] = 'Access denied.';
-        header('Location: /cricket-shop/login.php');
+        header('Location: /watch-shop/login.php');
         exit;
     }
 }

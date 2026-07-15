@@ -21,7 +21,7 @@ if (!$order && is_admin()) {
 
 if (!$order) {
     set_flash('error', 'Order not found.');
-    redirect('/cricket-shop/order-history.php');
+    redirect('/watch-shop/order-history.php');
 }
 
 $items_stmt = mysqli_prepare($conn, "SELECT * FROM order_items WHERE order_id = ?");
@@ -32,7 +32,7 @@ $items = mysqli_stmt_get_result($items_stmt);
 
 <div class="receipt">
     <div class="receipt-header">
-        <h2>Cricket Shop Nepal</h2>
+        <h2>TimePiece Nepal</h2>
         <p>Order Receipt</p>
     </div>
 
@@ -88,7 +88,7 @@ $items = mysqli_stmt_get_result($items_stmt);
 
     <div class="text-center mt-3 no-print">
         <button onclick="window.print()" class="btn btn-secondary">Print Receipt</button>
-        <a href="/cricket-shop/order-history.php" class="btn btn-outline" style="color:var(--primary);border-color:var(--primary);">Back to Orders</a>
+        <a href="/watch-shop/order-history.php" class="btn btn-outline" style="color:var(--primary);border-color:var(--primary);">Back to Orders</a>
     </div>
 </div>
 

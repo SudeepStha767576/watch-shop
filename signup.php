@@ -3,13 +3,13 @@ $page_title = 'Sign Up';
 require_once 'includes/header.php';
 
 if (is_logged_in()) {
-    redirect('/cricket-shop/');
+    redirect('/watch-shop/');
 }
 ?>
 
 <div class="form-card">
     <h2>Create Account</h2>
-    <form action="/cricket-shop/api/signup-handler.php" method="POST">
+    <form action="/watch-shop/api/signup-handler.php" method="POST">
         <?php echo csrf_input(); ?>
 
         <div class="form-group">
@@ -61,7 +61,7 @@ if (is_logged_in()) {
         <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
     </form>
     <div class="form-footer">
-        Already have an account? <a href="/cricket-shop/login.php">Login here</a>
+        Already have an account? <a href="/watch-shop/login.php">Login here</a>
     </div>
 </div>
 

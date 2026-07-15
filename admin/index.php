@@ -38,9 +38,9 @@ $pending_orders = mysqli_fetch_assoc(mysqli_query($conn, "SELECT COUNT(*) as cou
     <h2>Quick Actions</h2>
 </div>
 <div class="flex gap-2">
-    <a href="/cricket-shop/admin/add-product.php" class="btn btn-primary">Add New Product</a>
-    <a href="/cricket-shop/admin/products.php" class="btn btn-secondary">Manage Products</a>
-    <a href="/cricket-shop/admin/orders.php" class="btn btn-secondary">View Orders</a>
+    <a href="/watch-shop/admin/add-product.php" class="btn btn-primary">Add New Product</a>
+    <a href="/watch-shop/admin/products.php" class="btn btn-secondary">Manage Products</a>
+    <a href="/watch-shop/admin/orders.php" class="btn btn-secondary">View Orders</a>
 </div>
 
 <?php require_once __DIR__ . '/../includes/footer.php'; ?>
