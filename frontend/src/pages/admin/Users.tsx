@@ -31,6 +31,9 @@ export default function Users() {
 
   useEffect(() => { fetchUsers() }, [])
 
+  const admins = users.filter((u) => u.role === 'admin')
+  const normalUsers = users.filter((u) => u.role === 'user')
+
   const handleDelete = async (id: number) => {
     setDeleting(id)
     try {
@@ -62,38 +65,70 @@ export default function Users() {
       {users.length === 0 ? (
         <p className="text-center py-20 text-muted-foreground">No users found.</p>
       ) : (
-        <div className="space-y-3">
-          {users.map((u) => (
-            <div key={u.id} className="flex items-center gap-4 rounded-xl border p-4 hover:border-amber-500/20 transition-colors">
-              <div className="h-10 w-10 rounded-full bg-amber-500/10 flex items-center justify-center shrink-0">
-                {u.role === 'admin' ? <Shield className="h-5 w-5 text-amber-500" /> : <UserCircle className="h-5 w-5 text-muted-foreground" />}
-              </div>
-              <div className="flex-1 min-w-0">
-                <div className="flex items-center gap-2">
-                  <p className="font-semibold truncate">{u.full_name}</p>
-                  {u.role === 'admin' && <Badge className="bg-amber-500/15 text-amber-600 text-[10px]">Admin</Badge>}
-                </div>
-                <p className="text-sm text-muted-foreground truncate">@{u.username} &middot; {u.email} &middot; {u.phone}</p>
-              </div>
-              <p className="text-xs text-muted-foreground hidden md:block shrink-0">
-                {new Date(u.created_at).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
-              </p>
-              {u.role !== 'admin' && (
-                confirmId === u.id ? (
-                  <div className="flex items-center gap-1 shrink-0">
-                    <Button size="sm" variant="destructive" onClick={() => { handleDelete(u.id); setConfirmId(null) }} disabled={deleting === u.id}>
-                      {deleting === u.id ? '...' : 'Yes'}
-                    </Button>
-                    <Button size="sm" variant="ghost" onClick={() => setConfirmId(null)}>No</Button>
-                  </div>
-                ) : (
-                  <Button variant="ghost" size="sm" onClick={() => setConfirmId(u.id)} className="text-destructive hover:text-destructive hover:bg-destructive/10 shrink-0">
-                    <Trash2 className="h-4 w-4" />
-                  </Button>
-                )
-              )}
+        <div className="space-y-8">
+          <div>
+            <div className="flex items-center gap-2 mb-4">
+              <Shield className="h-4 w-4 text-amber-500" />
+              <h2 className="text-sm font-semibold uppercase tracking-wider text-amber-500">Administrators</h2>
+              <Badge variant="secondary" className="text-[10px]">{admins.length}</Badge>
             </div>
-          ))}
+            <div className="space-y-3">
+              {admins.map((u) => (
+                <div key={u.id} className="flex items-center gap-4 rounded-xl border border-amber-500/20 bg-amber-500/5 p-4">
+                  <div className="h-10 w-10 rounded-full bg-amber-500/15 flex items-center justify-center shrink-0">
+                    <Shield className="h-5 w-5 text-amber-500" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="font-semibold truncate">{u.full_name}</p>
+                    <p className="text-sm text-muted-foreground truncate">@{u.username} &middot; {u.email} &middot; {u.phone}</p>
+                  </div>
+                  <p className="text-xs text-muted-foreground hidden md:block shrink-0">
+                    {new Date(u.created_at).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <div className="flex items-center gap-2 mb-4">
+              <UserCircle className="h-4 w-4 text-muted-foreground" />
+              <h2 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">Customers</h2>
+              <Badge variant="secondary" className="text-[10px]">{normalUsers.length}</Badge>
+            </div>
+            {normalUsers.length === 0 ? (
+              <p className="text-center py-10 text-muted-foreground text-sm">No customers yet.</p>
+            ) : (
+              <div className="space-y-3">
+                {normalUsers.map((u) => (
+                  <div key={u.id} className="flex items-center gap-4 rounded-xl border p-4 hover:border-amber-500/20 transition-colors">
+                    <div className="h-10 w-10 rounded-full bg-muted flex items-center justify-center shrink-0">
+                      <UserCircle className="h-5 w-5 text-muted-foreground" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="font-semibold truncate">{u.full_name}</p>
+                      <p className="text-sm text-muted-foreground truncate">@{u.username} &middot; {u.email} &middot; {u.phone}</p>
+                    </div>
+                    <p className="text-xs text-muted-foreground hidden md:block shrink-0">
+                      {new Date(u.created_at).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
+                    </p>
+                    {confirmId === u.id ? (
+                      <div className="flex items-center gap-1 shrink-0">
+                        <Button size="sm" variant="destructive" onClick={() => { handleDelete(u.id); setConfirmId(null) }} disabled={deleting === u.id}>
+                          {deleting === u.id ? '...' : 'Yes'}
+                        </Button>
+                        <Button size="sm" variant="ghost" onClick={() => setConfirmId(null)}>No</Button>
+                      </div>
+                    ) : (
+                      <Button variant="ghost" size="sm" onClick={() => setConfirmId(u.id)} className="text-destructive hover:text-destructive hover:bg-destructive/10 shrink-0">
+                        <Trash2 className="h-4 w-4" />
+                      </Button>
+                    )}
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
         </div>
       )}
     </div>
