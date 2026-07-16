@@ -68,7 +68,7 @@ export default function Dashboard() {
         ))}
       </div>
 
-      <div className="grid md:grid-cols-2 gap-4">
+      <div className="grid md:grid-cols-3 gap-4">
         <Link to="/admin/products" className="group flex items-center justify-between rounded-xl border p-5 hover:border-amber-500/30 hover:bg-amber-500/5 transition-all">
           <div>
             <h3 className="font-semibold mb-1">Manage Products</h3>
@@ -80,6 +80,13 @@ export default function Dashboard() {
           <div>
             <h3 className="font-semibold mb-1">View Orders</h3>
             <p className="text-sm text-muted-foreground">Track and manage customer orders</p>
+          </div>
+          <ArrowRight className="h-5 w-5 text-muted-foreground group-hover:text-amber-500 group-hover:translate-x-1 transition-all" />
+        </Link>
+        <Link to="/admin/users" className="group flex items-center justify-between rounded-xl border p-5 hover:border-amber-500/30 hover:bg-amber-500/5 transition-all">
+          <div>
+            <h3 className="font-semibold mb-1">Manage Users</h3>
+            <p className="text-sm text-muted-foreground">View and manage user accounts</p>
           </div>
           <ArrowRight className="h-5 w-5 text-muted-foreground group-hover:text-amber-500 group-hover:translate-x-1 transition-all" />
         </Link>

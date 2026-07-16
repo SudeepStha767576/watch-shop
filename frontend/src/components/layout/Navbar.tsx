@@ -1,5 +1,5 @@
 import { Link, useNavigate, useLocation } from 'react-router-dom'
-import { ShoppingCart, Menu, LogOut, Watch } from 'lucide-react'
+import { ShoppingCart, Menu, LogOut, Watch, User } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 import { Separator } from '@/components/ui/separator'
@@ -38,6 +38,7 @@ export default function Navbar() {
                 <Link to="/admin" className={`text-sm font-medium transition-colors ${isActive('/admin') ? 'text-amber-400' : 'text-white/60 hover:text-white'}`}>Dashboard</Link>
                 <Link to="/admin/products" className={`text-sm font-medium transition-colors ${isActive('/admin/products') ? 'text-amber-400' : 'text-white/60 hover:text-white'}`}>Products</Link>
                 <Link to="/admin/orders" className={`text-sm font-medium transition-colors ${isActive('/admin/orders') ? 'text-amber-400' : 'text-white/60 hover:text-white'}`}>Orders</Link>
+                <Link to="/admin/users" className={`text-sm font-medium transition-colors ${isActive('/admin/users') ? 'text-amber-400' : 'text-white/60 hover:text-white'}`}>Users</Link>
               </>
             ) : (
               <>
@@ -59,15 +60,27 @@ export default function Navbar() {
                     </span>
                   )}
                 </Link>
-                <Button variant="ghost" size="sm" onClick={handleLogout} className="hidden md:inline-flex text-white/50 hover:text-white hover:bg-white/10 gap-1">
-                  <LogOut className="h-3.5 w-3.5" />
-                </Button>
+                <div className="hidden md:flex items-center gap-2">
+                  <div className="flex items-center gap-1.5 text-white/60 text-sm">
+                    <User className="h-3.5 w-3.5" />
+                    <span>{user.full_name}</span>
+                  </div>
+                  <Button variant="ghost" size="sm" onClick={handleLogout} className="text-white/50 hover:text-white hover:bg-white/10 gap-1">
+                    <LogOut className="h-3.5 w-3.5" />
+                  </Button>
+                </div>
               </>
             )}
             {user && isAdmin && (
-              <Button variant="ghost" size="sm" onClick={handleLogout} className="hidden md:inline-flex text-white/50 hover:text-white hover:bg-white/10 gap-1">
-                <LogOut className="h-3.5 w-3.5" /> Logout
-              </Button>
+              <div className="hidden md:flex items-center gap-2">
+                <div className="flex items-center gap-1.5 text-white/60 text-sm">
+                  <User className="h-3.5 w-3.5" />
+                  <span>{user.full_name}</span>
+                </div>
+                <Button variant="ghost" size="sm" onClick={handleLogout} className="text-white/50 hover:text-white hover:bg-white/10 gap-1">
+                  <LogOut className="h-3.5 w-3.5" /> Logout
+                </Button>
+              </div>
             )}
             {!loading && !user && (
               <div className="hidden md:flex items-center gap-3">
@@ -92,6 +105,7 @@ export default function Navbar() {
                         <Link to="/admin" onClick={() => setOpen(false)} className="block px-3 py-2.5 rounded-lg text-white/70 hover:text-white hover:bg-white/5 text-sm font-medium">Dashboard</Link>
                         <Link to="/admin/products" onClick={() => setOpen(false)} className="block px-3 py-2.5 rounded-lg text-white/70 hover:text-white hover:bg-white/5 text-sm font-medium">Products</Link>
                         <Link to="/admin/orders" onClick={() => setOpen(false)} className="block px-3 py-2.5 rounded-lg text-white/70 hover:text-white hover:bg-white/5 text-sm font-medium">Orders</Link>
+                        <Link to="/admin/users" onClick={() => setOpen(false)} className="block px-3 py-2.5 rounded-lg text-white/70 hover:text-white hover:bg-white/5 text-sm font-medium">Users</Link>
                       </>
                     ) : (
                       <>
@@ -108,9 +122,15 @@ export default function Navbar() {
                       <Link to="/signup" onClick={() => setOpen(false)}><Button className="w-full bg-amber-500 hover:bg-amber-600 text-black font-semibold">Sign Up</Button></Link>
                     </div>
                   ) : (
-                    <Button variant="ghost" onClick={() => { handleLogout(); setOpen(false) }} className="w-full justify-start gap-2 text-white/50 hover:text-white hover:bg-white/10">
-                      <LogOut className="h-4 w-4" /> Sign Out
-                    </Button>
+                    <>
+                      <div className="flex items-center gap-2 px-3 py-2 text-white/70 text-sm">
+                        <User className="h-4 w-4" />
+                        <span className="font-medium">{user.full_name}</span>
+                      </div>
+                      <Button variant="ghost" onClick={() => { handleLogout(); setOpen(false) }} className="w-full justify-start gap-2 text-white/50 hover:text-white hover:bg-white/10">
+                        <LogOut className="h-4 w-4" /> Sign Out
+                      </Button>
+                    </>
                   )}
                 </div>
               </SheetContent>

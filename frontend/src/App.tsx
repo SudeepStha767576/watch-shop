@@ -23,6 +23,7 @@ import AdminProducts from '@/pages/admin/Products'
 import AddProduct from '@/pages/admin/AddProduct'
 import EditProduct from '@/pages/admin/EditProduct'
 import AdminOrders from '@/pages/admin/Orders'
+import AdminUsers from '@/pages/admin/Users'
 
 export default function App() {
   return (
@@ -54,6 +55,7 @@ export default function App() {
                   <Route path="/admin/products/add" element={<AddProduct />} />
                   <Route path="/admin/products/edit/:id" element={<EditProduct />} />
                   <Route path="/admin/orders" element={<AdminOrders />} />
+                  <Route path="/admin/users" element={<AdminUsers />} />
                 </Route>
 
                 <Route path="*" element={

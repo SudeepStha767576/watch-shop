@@ -116,5 +116,15 @@ if (preg_match('/^\/admin\/orders\/(\d+)\/deliver$/', $uri, $m) && $method === '
     AdminController::deliverOrder($conn, $m[1]);
 }
 
+// Admin user management
+if ($uri === '/admin/users' && $method === 'GET') {
+    require_once __DIR__ . '/controllers/AdminController.php';
+    AdminController::listUsers($conn);
+}
+if (preg_match('/^\/admin\/users\/(\d+)$/', $uri, $m) && $method === 'DELETE') {
+    require_once __DIR__ . '/controllers/AdminController.php';
+    AdminController::deleteUser($conn, $m[1]);
+}
+
 // 404 fallback
 error('Endpoint not found.', 404);

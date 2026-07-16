@@ -147,6 +147,59 @@ class AdminController {
         success(['message' => 'Order #' . $id . ' marked as Delivered.']);
     }
 
+    public static function listUsers($conn) {
+        require_admin($conn);
+
+        $result = mysqli_query($conn, "SELECT id, full_name, username, email, phone, address, role, created_at FROM users ORDER BY created_at DESC");
+        $users = [];
+        while ($row = mysqli_fetch_assoc($result)) {
+            $row['id'] = (int)$row['id'];
+            $users[] = $row;
+        }
+
+        success(['users' => $users]);
+    }
+
+    public static function deleteUser($conn, $id) {
+        require_admin($conn);
+        $id = (int)$id;
+
+        $stmt = mysqli_prepare($conn, "SELECT role FROM users WHERE id = ?");
+        mysqli_stmt_bind_param($stmt, "i", $id);
+        mysqli_stmt_execute($stmt);
+        $user = mysqli_fetch_assoc(mysqli_stmt_get_result($stmt));
+        mysqli_stmt_close($stmt);
+
+        if (!$user) {
+            error('User not found.', 404);
+        }
+        if ($user['role'] === 'admin') {
+            error('Cannot delete admin users.', 403);
+        }
+
+        $order_check = mysqli_prepare($conn, "SELECT COUNT(*) as c FROM orders WHERE user_id = ? AND status IN ('Pending','Paid')");
+        mysqli_stmt_bind_param($order_check, "i", $id);
+        mysqli_stmt_execute($order_check);
+        $pending = (int)mysqli_fetch_assoc(mysqli_stmt_get_result($order_check))['c'];
+        mysqli_stmt_close($order_check);
+
+        if ($pending > 0) {
+            error('Cannot delete user with active orders.', 422);
+        }
+
+        $stmt = mysqli_prepare($conn, "DELETE FROM cart WHERE user_id = ?");
+        mysqli_stmt_bind_param($stmt, "i", $id);
+        mysqli_stmt_execute($stmt);
+        mysqli_stmt_close($stmt);
+
+        $stmt = mysqli_prepare($conn, "DELETE FROM users WHERE id = ?");
+        mysqli_stmt_bind_param($stmt, "i", $id);
+        mysqli_stmt_execute($stmt);
+        mysqli_stmt_close($stmt);
+
+        success(['message' => 'User deleted.']);
+    }
+
     private static function handleImageUpload() {
         if (!isset($_FILES['image']) || $_FILES['image']['error'] !== UPLOAD_ERR_OK) {
             return null;
